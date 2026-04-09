@@ -1,0 +1,50 @@
+#verify {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    align-items: center;
+    margin: 0;
+    max-width: none;
+
+    form {
+        text-align: center;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        width: max-content;
+
+        span {
+            color: #919191;
+
+        }
+
+        .email-wrapper {
+            font-size: 48px;
+            font-weight: 500;
+            line-height: 1;
+            padding-bottom: 24px;
+        }
+    }
+}
+
+.code-v {
+    margin-left: auto;
+
+    a {
+        color: #919191;
+    }
+}
+
+#v-btn {
+    width: 100%;
+    padding-block: 18px;
+    text-transform: uppercase;
+    line-height: 1;
+    border-radius: 8px;
+    background-color: #2C2C2C;
+    border: none;
+    transition: all .6s var(--bouncy-ease);
+    /* border-radius: 30px; */
+    color: white;
+}

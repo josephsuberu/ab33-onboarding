@@ -1,7 +1,6 @@
 import { useState } from "react";
 import logo from "/logo.svg";
-import { useRef } from "react";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -9,88 +8,16 @@ export default function SignUp() {
     email: "",
     password: "",
   });
-  let invalidAttempts = 0;
-  let formFilled = true;
 
-  const formRef = useRef(null);
-  const submitBtn = document.querySelector("#submitBtn");
+  let navigate = useNavigate();
 
-  useEffect(() => {
-    const inputs = formRef.current.querySelectorAll("[required]");
-    console.log(formRef.current.querySelectorAll("[required]"));
-    console.log(formFilled);
-    console.log(invalidAttempts);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    // validation check
-    const updateSubmitState = () => {
-      inputs.forEach((input) => {
-        const warning = input.parentElement.querySelector("#warningBlock");
-        console.log(warning);
+    console.log("form submitted", formData.email);
 
-        // reset state first
-        warning.textContent = "";
-
-        if (!input.checkValidity()) {
-          formFilled = false;
-          warning.textContent = input.validationMessage;
-        } else {
-          warning.textContent = "";
-        }
-      });
-
-      const allValid = Array.from(inputs).every((input) =>
-        input.checkValidity(),
-      );
-
-      if (allValid) {
-        formFilled = true;
-        submitBtn.disabled = false;
-        submitBtn.textContent = "submit";
-        submitBtn.classList.remove("hidden");
-        submitBtn.style.cssText = "cursor: pointer;";
-      }
-    };
-
-    // live validation block on each input
-    inputs.forEach((input) =>
-      input.addEventListener("input", updateSubmitState),
-    );
-
-    const handleSubmit = (e) => {
-      e.preventDefault();
-
-      console.log("form submitted", formData.email);
-
-      updateSubmitState();
-
-      if (formFilled) {
-        console.log("Form submitted successfully");
-        invalidAttempts = 0;
-      } else {
-        invalidAttempts++;
-      }
-
-      if (invalidAttempts >= 3) {
-        formFilled = false;
-        submitBtn.disabled = true;
-        submitBtn.textContent = "removing...";
-        submitBtn.classList.add("holdExcessive");
-        setTimeout(() => {
-          submitBtn.style.cssText = " cursor: default;";
-          submitBtn.classList.remove("holdExcessive");
-          submitBtn.classList.add("hidden");
-        }, 800);
-      } else {
-        formFilled = true;
-        submitBtn.disabled = false;
-        submitBtn.textContent = "submit";
-      }
-    };
-
-    document.addEventListener("DOMContentLoaded", () => {
-      formRef.current.addEventListener("submit", handleSubmit);
-    });
-  }, []);
+    navigate("/verify");
+  };
 
   return (
     <main data-form>
@@ -101,7 +28,7 @@ export default function SignUp() {
       <div className="form-wrapper">
         <h1>Sign up</h1>
 
-        <form ref={formRef}>
+        <form onSubmit={handleSubmit}>
           <div data-form-group>
             <label htmlFor="fullName">
               <span className="mono">FULL NAME</span>

@@ -1,24 +1,18 @@
 import { Link } from "react-router-dom";
 import "./verify.css";
 import InputOtp from "./components/InputOtp";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import useAutoHeight from "./components/useAutoHeight";
-// import gsap from "gsap";
-// import { useGSAP } from "@gsap/react";
-// import { Flip } from "gsap/Flip";
 
 export default function Verify() {
   const [otp, setOtp] = useState("");
   const [otpBtn, setOtpBtn] = useState("Confirm my account");
   const [notSubmitted, setNotSubmitted] = useState(true);
+  const [isOTPvalid, setIsOTPvalid] = useState(false);
   const { ref, height } = useAutoHeight();
 
   const isComplete = otp.length === 5;
-
-  const updateOTP = (value) => {
-    setOtp(value);
-  };
 
   // form submit
   const handleOTP = (e) => {
@@ -27,8 +21,15 @@ export default function Verify() {
     if (isComplete && otp === "12345") {
       console.log("correct");
       setOtp("");
+      setTimeout(() => {
+        setIsOTPvalid(true);
+      }, 1300);
     } else {
+      setIsOTPvalid(false);
       console.log("wrong");
+      clearTimeout(() => {
+        setIsOTPvalid(true);
+      }, 1300);
       setOtp("");
     }
   };
@@ -50,18 +51,20 @@ export default function Verify() {
   };
 
   return (
-    <main data-form id="verify">
+    <main id="verifyForm">
       <form
         onSubmit={handleOTP}
         style={{
           height: height ?? "auto",
-          overflow: "hidden",
+          // overflow: "hidden",
           transition: "height 1000ms cubic-bezier(0.65, 0, 0.35, 1)",
         }}
       >
         <div className="inner-verify-form" ref={ref}>
           <div>
-            <span className="handwritten">
+            <span
+              className={`handwritten ${isOTPvalid ? "opacity-0 leading-0" : ""}`}
+            >
               We sent your verification code to
             </span>
 
@@ -75,7 +78,7 @@ export default function Verify() {
               </div>
             )}
 
-            {notSubmitted && <InputOtp otp={otp} setOtp={updateOTP} />}
+            {notSubmitted && <InputOtp otp={otp} setOtp={(value)=> {setOtp(value)}} />}
           </div>
 
           {notSubmitted && (

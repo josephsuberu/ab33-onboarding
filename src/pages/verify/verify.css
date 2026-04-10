@@ -1,23 +1,24 @@
-#verify {
+#verifyForm {
+    height: 100vh;
+    min-height: 100dvh;
+    max-height: 100svh;
     display: flex;
+    flex-wrap: nowrap;
     justify-content: center;
-    flex: 1;
+    width: 100vw;
     align-items: center;
-    margin: 0;
-    max-width: none;
-    width: 100%;
 
     form {
         text-align: center;
-        width: max-content;
-        transition: all .3s var(--bouncy-ease);
-        gap: 24px;
+        margin-block: auto;
 
+        /* width:; */
         span {
             color: #919191;
         }
 
         .inner-verify-form {
+            /* padding-inline: 20px; */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -31,6 +32,17 @@
             padding-bottom: 24px;
         }
     }
+}
+
+#verify {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    max-width: none;
+    width: 100%;
+
+
 }
 
 .code-v {

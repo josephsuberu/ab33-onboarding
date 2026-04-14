@@ -71,18 +71,34 @@
     background-color: #A5A5A5;
 }
 
-.inner-creating-acc{
+.inner-creating-acc {
     display: flex;
     flex-direction: column;
     /* gap: 24px; */
     gap: 18px;
 }
 
-.acct-crt-txt{
+.acct-crt-txt {
     color: #919191;
 }
 
-.char{
-     overflow: visible;
-      padding: 0 .0025px;
+.char {
+    overflow: visible;
+    padding: 0 .0025px;
+}
+
+.avatar-pfp {
+    scale: .5;
+    opacity: 0;
+    transition: all .8s var(--bouncy-ease);
+}
+
+.avatar-pfp-visible {
+    opacity: 1;
+    will-change: scale;
+    -webkit-backdrop-filter: none;
+    -moz-backdrop-filter: none;
+    backdrop-filter: none;
+    scale: 1;
+    z-index: 3;
 }

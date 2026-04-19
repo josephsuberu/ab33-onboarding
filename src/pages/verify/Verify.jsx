@@ -7,6 +7,7 @@ import useAutoHeight from "./components/useAutoHeight";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { CustomEase } from "gsap/CustomEase";
+import MyAvatar from "./components/MyAvatar";
 
 export default function Verify() {
   const [otp, setOtp] = useState("");
@@ -86,6 +87,8 @@ export default function Verify() {
                   return gsap.to(specialChar, {
                     width: 0,
                     duration: 0.2,
+                    ease: "smooth-slide",
+
                     onComplete: () => {
                       specialChar.forEach((char) => char.remove());
                     },
@@ -138,10 +141,10 @@ export default function Verify() {
         }}
       >
         <div
+          ref={ref}
           className={cn(
             `${boolState.isOTPvalid ? "inner-creating-acc" : "inner-verify-form"}`,
           )}
-          ref={ref}
         >
           <div>
             <span
@@ -211,14 +214,20 @@ export default function Verify() {
           )}
 
           {/* avater profile ui */}
+          <div
+            aria-hidden
+            className={cn(
+              `absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mx-auto avatar-pfp`,
+              `${boolState.isAvatarVisible ? "avatar-pfp-visible" : ""}`,
+            )}
+          >
+            <MyAvatar size={250} breathe={true} mouseFollow={true} />
+          </div>
+
           {boolState.isAvatarVisible && (
-            <div
-              aria-hidden
-              className={cn(
-                `w-30 h-30 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mx-auto rounded-full avatar-pfp bg-red-500`,
-                `${boolState.isAvatarVisible ? "avatar-pfp-visible" : ""}`,
-              )}
-            />
+            <p className="text-3xl font-medium bottom-1 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+              Welcome Joseph
+            </p>
           )}
         </div>
       </form>

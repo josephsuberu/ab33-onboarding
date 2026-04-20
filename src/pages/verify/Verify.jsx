@@ -217,7 +217,7 @@ export default function Verify() {
           <div
             aria-hidden
             className={cn(
-              `absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mx-auto avatar-pfp`,
+              `absolute top-1/2 z-2 left-1/2 -translate-x-1/2 -translate-y-1/2 mx-auto avatar-pfp`,
               `${boolState.isAvatarVisible ? "avatar-pfp-visible" : ""}`,
             )}
           >
@@ -225,7 +225,7 @@ export default function Verify() {
           </div>
 
           {boolState.isAvatarVisible && (
-            <p className="text-3xl font-medium bottom-1 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <p className="text-3xl w-full  font-medium bottom-1 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
               Welcome Joseph
             </p>
           )}
